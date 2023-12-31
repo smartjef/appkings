@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if gallery_images %}
+    <!-- Projects Gallery Section -->
+    <section class="projects projects-gallery">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h3 class="d-none">Our Gallery</h3>
+          </div>
+        </div>
+        <div class="row"> 
+          {% for image in gallery_images %}
+          <div class="col-12 col-md-6 col-lg-4 team-item ">
+            <div class="project-panel">
+              <div class="project-panel-holder">
+                <div class="project-img"><img src="{{ image.image.url }}" alt=" item"/>
+                  <div class="project-hover">
+                    <div class="project-action">
+                      <div class="project-zoom"><i class="far fa-eye"></i><a class="img-gallery-item" href="{{ image.image.url }}" title="wind generators item"></a></div>
+                    </div>
+                    <!-- End .project-action -->
+                  </div>
+                  <!-- End .project-hover-->
+                </div>
+                <!-- End .project-img-->
+              </div>
+              <!-- End .project-panel-holder-->
+            </div>
+            <!-- End .project-panel-->
+          </div>
+          {% endfor %}
+        </div>
+        <div class="row">
+          {% for image in gallery_images %}
+          <div class="col-12 col-md-6 col-lg-4 content d-none team-item ">
+            <div class="project-panel">
+              <div class="project-panel-holder">
+                <div class="project-img"><img src="{{ image.image.url }}" alt=" item"/>
+                  <div class="project-hover">
+                    <div class="project-action">
+                      <div class="project-zoom"><i class="far fa-eye"></i><a class="img-gallery-item" href="{{ image.image.url }}" title="wind generators item"></a></div>
+                    </div>
+                    <!-- End .project-action -->
+                  </div>
+                  <!-- End .project-hover-->
+                </div>
+                <!-- End .project-img-->
+              </div>
+              <!-- End .project-panel-holder-->
+            </div>
+            <!-- End .project-panel-->
+          </div>
+          {% endfor %}
+        </div>
+        <!-- End .row-->
+      </div>
+    </section>
+{% endif %}
+{% endif %}

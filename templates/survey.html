@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+      <!-- Survey Section-->
+      <section class="contact contact-4" id="contact-4">
+        <div class="container">
+          <div class="contact-panel contact-panel-3">
+            <div class="heading heading-6">
+              <p class="heading-subtitle">Help Us Improve Your Experience.</p>
+              <h2 class="heading-title">Share Your Insights and Shape Our Future!</h2>
+              <p class="heading-desc">At AppKings Solutions, we are committed to enhancing our operations, services, and products based on your valuable feedback. Rest assured, your data will be securely guarded. We prioritize your privacy and employ advanced measures to protect your information. Your insights play a crucial role in guiding us towards continuous improvement.</p>
+              <p class="heading-desc">Take a moment to share your insights through our survey. Your feedback matters as we strive for excellence in delivering the best quality service tailored to your needs.</p>
+              <div class="contact-action"><a class="btn btn--primary" href="{% url 'core:about' %}">learn more <i class="energia-arrow-right"></i></a><a class="btn btn--bordered btn--white" href="{% url 'core:contact' %}">contact us</a></div>
+              <div class="contact-quote contact-quote-3"> <img src="/static/icons/question.png" alt="icon"/>
+                <p>Receive an accurate quote within 3-5 days when you fill out <a href="{% url 'core:contact' %}">contact us</a> form. Or, give us a call: <a href="tel:+254700191991">+254700191991</a></p>
+              </div>
+            </div>
+            <div class="contact-card">
+              <div class="contact-body">
+                <form method="post" action="">
+                  {% csrf_token %}
+                  <div class="mb-20">
+                    <div class="row">
+                      <div class="col-12 col-md-6">
+                        <label class="form-label" for="{{ form.name.id_for_label }}">{{ form.name.label_tag }}</label>
+                        {{ form.name }}
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label class="form-label" for="{{ form.email.id_for_label }}">{{ form.email.label_tag }}</label>
+                        {{ form.email }}
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label class="form-label" for="{{ form.phone_number.id_for_label }}">{{ form.phone_number.label_tag }}</label>
+                        {{ form.phone_number }}
+                      </div>
+                      <div class="col-12 col-md-6">
+                        <label class="form-label" for="{{ form.discover_method.id_for_label }}">{{ form.discover_method.label_tag }}</label>
+                        {{ form.discover_method }}
+                      </div>
+                      <div class="col-12">
+                        <label class="form-label" for="{{ form.recommend_to_friends.id_for_label }}">{{ form.recommend_to_friends.label_tag }}</label>
+                        {{ form.recommend_to_friends }}
+                    </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="row">
+                      <div class="col-12">
+                        <label class="form-label" for="{{ form.liked_about_us.id_for_label }}">{{ form.liked_about_us.label_tag }}</label>
+                        {{ form.liked_about_us }}
+                      </div>  
+                      <div class="col-12">
+                          <label class="form-label" for="{{ form.improvements_needed.id_for_label }}">{{ form.improvements_needed.label_tag }}</label>
+                          {{ form.improvements_needed }}
+                      </div>
+                      <div class="col-12">
+                          <label class="form-label" for="{{ form.additional_suggestions.id_for_label }}">{{ form.additional_suggestions.label_tag }}</label>
+                          {{ form.additional_suggestions }}
+                      </div>                    
+                    </div>
+                  </div>
+                  <div> 
+                    <div class="row">
+                      <div class="col-12">
+                        <button class="btn btn--secondary w-100">submit request <i class="energia-arrow-right"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- End .contact-body -->
+            </div>
+          </div>
+          <!-- End .contact-panel-->
+        </div>
+        <!-- End .container-->
+      </section>
+{% endblock %}

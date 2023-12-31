@@ -1,0 +1,51 @@
+<!--services Section-->
+<section class="services services-1 bg-grey" id="services-1">
+    <div class="container">
+        {% if title != 'Our Services' %}
+        <div class="heading heading-3 text-center">
+            <div class="row">
+                <div class="col-12 col-lg-6 offset-lg-3">
+                    <p class="heading-subtitle">Empowering Your Success with our Cutting-Edge Solutions</p>
+                    <h2 class="heading-title">Our Services</h2>
+                </div>                               
+                <!-- End .col-lg-6-->
+            </div>
+            <!-- End .row-->
+        </div>
+        {% endif %}
+        {% if services %}
+        <!-- End .heading-->
+        <div class="carousel owl-carousel carousel-dots dots-side" data-slide="3" data-slide-rs="1" data-autoplay="true"
+            data-nav="false" data-dots="true" data-space="30" data-loop="true" data-speed="800">
+            {% for service in services %}
+            <div>
+                <div class="service-panel">
+                    <div class="service-icon">
+                        <img src="{% if service.image %}{{ service.image.front_image.url }}{% else %}/static/images/favicon/favicon.jpeg{% endif %}" height="100" alt="{{ service.title }}">
+                        <!-- <i class="flaticon-004-solar-panel"></i> -->
+                    </div>
+                    <div class="service-content">
+                        <h4><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title|truncatechars:27 }}</a></h4>
+                        <p>
+                            {{ service.description|truncatechars:330|default:'No description' }}
+                        </p>
+
+                        <a class="btn btn--secondary" href="{{ service.get_absolute_url }}">read more <i class="energia-arrow-right"></i></a>
+                    </div>
+                </div>
+                <!-- End .service-panel-->
+            </div>
+            {% endfor %}
+        </div>
+        <!-- End .carousel-->
+        {% if title != 'Our Services' %}
+        <div class="more-services">
+            <p>Explore our diverse range of <a href="{% url 'core:services' %}">services</a> designed to elevate your business to new heights.</p>
+        </div>
+        {% endif %}
+        {% else %}
+        <p class="text-center">No Services Found</p>
+        {% endif %}
+    </div>
+    <!-- End .container-->
+</section>

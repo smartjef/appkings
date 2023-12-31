@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% block content %}
+      <!-- Google Map Section-->
+      <section class="map map-2"> 
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <h3 class="d-none">{{ title }}</h3>
+            </div>
+          </div>
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.795729630171!2d36.790660375778835!3d-1.2972427986904271!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f17673b747241%3A0xc242ada145328ad1!2sAppKings%20Solutions%20Ltd.!5e0!3m2!1sen!2ske!4v1703949464989!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </section>
+
+      <!-- Testimonials Section-->
+      <section class="testimonial testimonial-5 bg-overlay bg-overlay-white2">
+        <div class="bg-section"><img src="/static/images/background/wavy-pattern.png" alt="background"/></div>
+        <div class="container">
+          <div class="contact-panel contact-panel-2">
+            <div class="row">
+              <div class="col-12 col-lg-5 img-card-holder">
+                <div class="img-card img-card-2 bg-overlay bg-overlay-theme">
+                  <div class="bg-section"><img src="/static/images/about/1.jpg" alt="image"/></div>
+                  <div class="card-content">
+                    <div class="content-top">
+                      <p>If you have any inquiries or need assistance, Contact us today, and let's unlock the full potential of your business together.</p>
+                      <a href="https://maps.app.goo.gl/Hh97P6RWPkb17RSA7" target="_blank"><i class="energia-arrow-right"></i>Visit Our Office in Person</a>
+                    </div>                                                  
+                    <div class="content-bottom">
+                      <ul class="list-unstyled contact-infos"> 
+                        <li class="contact-info"><i class="energia-phone-Icon"></i>
+                          <p>Phone: <a href="tel:+254700191991">+254700191991</a></p>
+                        </li>
+                        <li class="contact-info"><i class="fa fa-envelope" aria-hidden="true"></i>
+                          <p>Email: <a href="mailto:info@appkings.co.ke">info@appkings.co.ke</a></p>
+                        </li>
+                        <li class="contact-info"><i class="energia-location-Icon"></i>
+                          <p>Location: <a href="https://maps.app.goo.gl/Hh97P6RWPkb17RSA7">TOP PLAZA, 5th Floor (Office 9), Along Kindaruma Road - Off Ngong Road,</a></p>
+                        </li>
+                        <li class="contact-info"><i class="energia-clock-Icon"></i>
+                          <p>Mon - Fri: 8:00 am - 5:00 pm	</p>
+                        </li>
+                      </ul><a class="btn btn--white" href="{% url 'core:about' %}">About us <i class="energia-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-7">
+                <div class="contact-card">
+                  <div class="contact-body">
+                    <h5 class="card-heading">Get in Touch</h5>
+                    <p class="card-desc">At AppKings Solutions, we take pride in delivering top-quality service. Contact us today to experience excellence firsthand.</p>
+                    <form method="post" action="">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-12 col-md-6">
+                          {{ form.name }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                          {{ form.subject }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                          {{ form.email }}
+                        </div>
+                        <div class="col-12 col-md-6">
+                          {{ form.phone_number }}
+                        </div>
+                        <div class="col-12">
+                          {{ form.message }}
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn--secondary">submit request <i class="energia-arrow-right"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- End .contact-body -->
+                </div>
+              </div>
+            </div>
+            <!-- End .row-->
+          </div>
+          {% if reviews %}
+          <!-- End .contact-panel-->
+          <div class="row">
+            <div class="col-12 col-lg-4">
+              <div class="counters-holder"> 
+                <!-- Start .counter-->
+                <div class="counter counter-3">
+                  <div class="counter-holder">
+                    <div class="counter-num"> <span class="counting" data-counterup-nums="14" data-counterup-beginat="0">14</span></div>
+                    <div class="counter-img">
+                      <div class="bg-section"><img src="/static/images/sliders/1.jpg" alt="image"/></div>
+                      <img src="/static/icons/rating.png" alt="">
+                    </div>
+                  </div>
+                  <div class="counter-desc">
+                    <p>Years Of Experience In The Industry</p>
+                  </div>
+                </div>
+                <!-- End .counter-->
+              </div>
+            </div>
+            <div class="col-12 col-lg-7 offset-lg-1">
+              <div class="heading heading-14"> 
+                <p class="heading-subtitle">What our clients say!</p>
+              </div>
+              <div class="testimonials-holder"> 
+                <div class="carousel owl-carousel testimonials-carousel" data-slide="1" data-slide-rs="1" data-autoplay="true" data-nav="false" data-dots="false" data-space="0" data-loop="false" data-speed="800">
+                  {% for review in reviews %}
+                  <div class="testimonial-panel testimonial-panel-2">
+                    <div class="testimonial-body">
+                      <div class="testimonial-content">
+                        <p>{{ review.message|truncatechars:240 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <div class="testimonial-thumbs">
+                {% for review in reviews %}
+                <div class="testimonial-thumb {% if forloop.counter == 1 %}active{% endif %}" data-hover="">
+                  <div class="thumb-img"> <img src="{% if review.image %}{{ review.image.url }}{% else %}/static/images/favicon/favicon.jpeg{% endif %}" alt="{{ review.name }}"/></div>
+                  <div class="thumb-body"> 
+                    <h6>{{ review.name }}</h6>
+                    <p>{{ review.position }}</p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          <!-- End .row-->
+        </div>
+        <!-- End .container-->
+      </section>
+{% endblock %}

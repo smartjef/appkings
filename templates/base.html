@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en-US">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="author" content="Jeff Odhiambo, VSTech Limited" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    {% block meta %} {% endblock %}
+    <title>{% block title %} {% endblock %} {% if title %}{{ title }} - {% endif %}{% if category %}{{ category }} -{% endif %} Appkings Solutions</title>
+    {% include 'partials/css.html' %}
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="dual-ring"></div>
+    </div>
+
+    <div class="wrapper clearfix" id="wrapperParallax">
+
+        {% include 'partials/top-nav.html' %}
+
+        <div class="module-content module-search-warp">
+            <div class="pos-vertical-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
+                            <form class="form-search">
+                                <input class="form-control" type="text" placeholder="type words then enter" />
+                                <button></button>
+                            </form>
+                            <!-- End .form-search -->
+                        </div>
+                        <!-- End .col-lg-8 -->
+                    </div>
+                    <!--  End .row-->
+                </div>
+                <!--  End .container-->
+            </div><a class="module-cancel" href="#"><i class="fas fa-times"></i></a>
+            <!-- End .module-cancel-->
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">x</button>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if title != 'Homepage' and title != 'Contact Us' %}
+            {% include 'partials/hero-section.html' %}
+        {% endif %}
+        {% block content %}
+
+        {% endblock %}
+
+        {% include 'partials/footer.html' %}
+
+        <div class="back-top" id="back-to-top" data-hover=""><i class="energia-arrow-up"></i></div>
+    </div>
+
+    {% include 'partials/js.html' %}
+</body>
+
+</html>

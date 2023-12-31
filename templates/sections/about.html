@@ -1,0 +1,64 @@
+<!--About Section-->
+<section class="about about-1" id="about-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="about-img">
+                    <div class="about-img-holder bg-overlay">
+                        <div class="bg-section"><img src="/static/images/about/1.jpg" alt="about Image" /></div>
+                    </div>
+                    <div>
+                        <!-- Start .counter-->
+                        <div class="counter">
+                            <div class="counter-icon"> 
+                                <img src="/static/icons/rating.png" alt="">
+                            </div>
+                            <div class="counter-num"> <span class="counting" data-counterup-nums="102">102</span>
+                                <p></p>
+                            </div>
+                            <div class="counter-name">
+                                <h6>happy clients</h6>
+                            </div>
+                        </div>
+                        <!-- End .counter-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-7">
+                <div class="heading heading-1">
+                    <p class="heading-subtitle heading-subtitle-bg">Empowering Businesses with Microsoft Dynamics 365</p>
+                    <h2 class="heading-title">About AppKings Solutions</h2>
+                </div>
+                <div class="about-block">
+                    <div class="row">
+                        <div class="col-12 col-lg-7">
+                            <div class="block-left">
+                                <p class="paragraph">At AppKings Solutions, we specialize in driving innovation through our expertise in Microsoft Dynamics 365 and Business Intelligence.</p>
+                                <p>With a focus on Microsoft Dynamics 365, we optimize business processes and enhance efficiency. Our proficiency in Business Intelligence solutions transforms raw data into actionable insights, enabling informed decision-making and strategic growth.</p>
+                                {% if title != 'About Us' %}
+                                    <a class="btn btn--secondary" href="{% url 'core:about' %}">Read More <i class="energia-arrow-right"></i></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-5">
+                            <div class="block-right">
+                                <div class="prief-set">
+                                    <p>Our Core Values:</p>
+                                    <ul class="list-unstyled advantages-list">
+                                        <li>Craftsmanship</li>
+                                        <li>Excellence</li>
+                                        <li>Integrity</li>
+                                        <li>Collaboration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>              
+            <!-- End .col-lg-6-->
+        </div>
+        <!-- End .row-->
+    </div>
+    <!-- End .container-->
+</section>

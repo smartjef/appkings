@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+      <!-- Faqs Section-->
+      <section class="faqs faqs-2" id="faqs-1">
+        <div class="container">
+          <div class="row"> 
+            <div class="col-12 col-lg-6 offset-lg-3"> 
+              <div class="heading heading-18 text-center">
+                <p class="heading-subtitle">What Are You Looking For?</p>
+                <h2 class="heading-title">Frequently Asked Questions</h2>
+              </div>
+            </div>
+          </div>
+          <div class="accordion accordion-2" id="accordion03">
+            <div class="row">
+              {% if faqs %}
+              {% for faq in faqs %}
+              <div class="col-12 col-lg-6">
+                <div>
+                  <div class="card">
+                    <div class="card-heading"><a class="card-link collapsed" data-hover="" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse01-{{ forloop.counter }}" href="#collapse01-{{ forloop.counter }}">{{ faq.question }}</a></div>
+                    <div class="collapse" id="collapse01-{{ forloop.counter }}" data-bs-parent="#accordion03">
+                      <div class="card-body">{{ faq.answer }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+              {% else %}
+                <p class="text-center">No FAQ Found</p>
+              {% endif %}
+          </div>
+          <!-- End .row-->
+        </div>
+        <div class="container">
+          <div class="more-faqs">
+            <p>Explore our diverse range of <a href="{% url 'core:services' %}">services</a> designed to elevate your business to new heights.</p>
+          </div>
+        </div>
+        <!-- End .container-->
+      </section>
+      {% include 'sections/counter.html' %}
+      {% include 'sections/blog.html' %}
+{% endblock %}

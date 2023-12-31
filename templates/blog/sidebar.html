@@ -1,0 +1,59 @@
+<style>
+    p{
+        
+    }
+</style>
+<div class="sidebar sidebar-blog">
+    <!-- Search-->
+    <div class="widget widget-search">
+        <div class="widget-title">
+            <h5>search</h5>
+        </div>
+        <div class="widget-content">
+            <form class="form-search" action="{% url 'core:blog' %}">
+                <div class="input-group">
+                    <input class="form-control" name="q" type="search" placeholder="Search ..." /><span
+                        class="input-group-btn">
+                        <button class="btn" type="submit"><i class="energia-search-Icon"></i></button></span>
+                </div>
+                <!-- End .input-group-->
+            </form>
+        </div>
+    </div>
+    <!-- End .widget-search -->
+    {% if blogs %}
+    <!-- Recent Posts-->
+    <div class="widget widget-recent-posts">
+        <div class="widget-title">
+            <h5>recent posts</h5>
+        </div>
+        <div class="widget-content">
+            {% for r_blog in blogs %}
+            <!-- Start .Post-->
+            <div class="post">
+                <div class="post-img"><img src="{% if r_blog.image %}{{ r_blog.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="{{ r_blog.title }}" /></div>
+                <div class="post-content">
+                    <div class="post-date">{{ r_blog.published_at }}</div>
+                    <div class="post-title"><a href="{{ r_blog.get_absolute_url }}">{{ r_blog.title|truncatechars:35 }}</a></div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if tags %}
+    <!-- Tags-->
+    <div class="widget widget-tags">
+        <div class="widget-title">
+            <h5>Tags</h5>
+        </div>
+        <div class="widget-content">
+            <a href="{% url 'core:blog' %}">All Posts</a>
+            {% for tag in tags %}
+            <a href="{{ tag.get_blogs_url }}">{{ tag.title }}</a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- End .widget-tags -->
+    {% endif %}
+</div>

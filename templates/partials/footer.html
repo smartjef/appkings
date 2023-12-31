@@ -1,0 +1,102 @@
+<footer class="footer footer-1">
+    <div class="footer-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-2">
+                    <div class="footer-widget widget-links">
+                        <div class="footer-widget-title">
+                            <h5>Quick Links</h5>
+                        </div>
+                        <div class="widget-content">
+                            <ul>
+                                <li><a href="{% url 'core:about' %}">About Us</a></li>
+                                <li><a href="{% url 'core:products' %}">Our Products</a></li>
+                                <li><a href="{% url 'core:products' %}">Our Services</a></li>
+                                <li><a href="{% url 'core:blog' %}">Blog</a></li>
+                                <li><a href="{% url 'core:survey' %}">survey</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% if services %}
+                <!--  End .col-lg-2-->
+                <div class="col-12 col-sm-6 col-md-6 col-lg-2">
+                    <div class="footer-widget widget-links">
+                        <div class="footer-widget-title">
+                            <h5>Our Services</h5>
+                        </div>
+                        <div class="widget-content">
+                            <ul>
+                                {% for service in services %}
+                                    <li><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title|truncatechars:27 }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if products %}
+                <!--  End .col-lg-2-->
+                <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                    <div class="footer-widget widget-links widget-icon">
+                        <div class="footer-widget-title">
+                            <h5>Our Products</h5>
+                        </div>
+                        <div class="widget-content">
+                            <ul>
+                                {% for product in products %}
+                                    <li><a href="{{ product.get_absolute_url }}" title="{{ product.title }}">{{ product.title|truncatechars:27 }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                <!--  End .col-lg-5-->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="footer-widget widget-links">
+                        <!-- <div class="footer-widget-title">
+                            <h5>Contact Us</h5>
+                        </div> -->
+                        <div class="widget-content">
+                            <ul>
+                                <li><a href="{% url 'core:contact' %}">contact us</a></li>
+                                <li class="">Phone: <a href="tel:+254700191991">+254700191991</a></li>
+                                <li class="">Email: <a href="mailto:info@appkings.co.ke" class="text-lowercase">info@appkings.co.ke</a>
+                                </li>
+                                <li class="address">
+                                    <p>Top plaza, 5th Floor (Office 9), Along Kindaruma Road - Off Ngong Road,
+                                    </p>
+                                </li>
+                                <li class="directions"><a href="https://maps.app.goo.gl/Hh97P6RWPkb17RSA7"><i class="energia-location-Icon me-2"></i>get directions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--  End .col-lg-3-->
+            </div>
+            <!-- End .row-->
+        </div>
+        <!--  End .container-->
+    </div>
+    <!--  End .footer-top-->
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer-copyright">
+                        <div class="copyright">
+                            <span>&copy; <script>document.write(new Date().getFullYear());</script> <a href="/">Appkings Solutions</a>. all rights reserved.</span>
+                            <ul class="list-unstyled social-icons">
+                                <li><a href="{% url 'core:terms' %}">Terms & Conditions</a></li>
+                                <li><a href="{% url 'core:privacy' %}">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  End .row-->
+    </div>
+    <!--  End .footer-bottom-->
+</footer>

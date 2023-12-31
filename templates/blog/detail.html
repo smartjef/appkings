@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!-- Blog Single Section -->
+  <section class="blog blog-single p-3" id="blog">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-8">
+          <div class="blog-entry">
+            <div class="entry-img"><img src="{% if blog.image %}{{ blog.image.cover_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="{{ blog.title }}"/>
+              <div class="entry-meta">
+                {% if blog.tags.all %}
+                  <div class="entry-category">
+                    {% for tag in blog.tags.all %}
+                      <a href="{{ tag.get_blogs_url }}">{{ tag.title }}</a>
+                    {% endfor %}
+                  </div>
+                {% endif %}
+                <div class="entry-date">{{ blog.published_at }}</div>
+                <div class="entry-author">{{ blog.author.get_full_name|default:'Anonymous' }}</div>
+                <div class="entry-comments"><span>comments:</span><span class="num">{{ blog.comments.all.count }}</span></div>
+              </div>
+              <!-- End .entry-meta-->
+            </div>
+            <div class="entry-content">
+              <div class="entry-title">
+                <h4>{{ blog.title }}</h4>
+              </div>
+              <div class="entry-bio">
+                <p>{{ blog.description|linebreaks }}</p>
+              </div>
+            </div>
+            <div class="nav-posts">
+              <div class="prev-post">
+                {% if prev_blog %}
+                <div class="post-img">
+                  <div class="overlay"> <i class="energia-arrow-right"></i></div><img src="{% if prev_blog.image %}{{ prev_blog.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="title"/>
+                </div>
+                <div class="post-body"><span>previous post</span><a class="post-link" href="{{ prev_blog.get_absolute_url }}">{{ prev_blog.title|truncatechars:60 }}</a></div>
+                {% endif %}
+              </div>
+              <div class="next-post">
+                {% if next_blog %}
+                <div class="post-body"><span>next post</span><a class="post-link" href="{{ next_blog.get_absolute_url }}">{{ next_blog.title|truncatechars:60 }}</a></div>
+                <div class="post-img">
+                  <div class="overlay"> <i class="energia-arrow-right"></i></div><img src="{% if next_blog.image %}{{ next_blog.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="title"/>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+            {% if blog.comments.all %}
+            <div class="entry-widget entry-comments" id="comments">
+              <div class="entry-widget-title">
+                <h4><span class="comments-number">{{ blog.comments.all.count }}</span> comments</h4>
+              </div>
+              <div class="entry-widget-content">
+                <ul class="comments-list">
+                  {% for comment in blog.comments.all %}
+                  <li class="comment-body">
+                    <div class="comment">
+                      <h6>{{ comment.name|title }}</h6>
+                      <div class="date">{{ comment.created_at }}</div>
+                      <p>{{ comment.message|linebreaks }}</p>
+                    </div>
+                  </li>
+                  {% endfor %}
+                  <!-- End .comment-->
+                </ul>
+                <!-- End .comments-list-->
+              </div>
+            </div>
+            {% endif %}
+            <!-- End .entry-comments-->
+            <div class="entry-widget entry-add-comment mb-0 clearfix">
+              <div class="entry-widget-title">
+                <h4>Leave A Comment</h4>
+              </div>
+              <div class="entry-widget-content">
+                <form class="mb-0" method="POST">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-12 col-md-6">
+                      {{ form.name }}
+                    </div>
+                    <div class="col-12 col-md-6">
+                      {{ form.email }}
+                    </div>
+                    <div class="col-12">
+                      {{ form.message }}
+                    </div>
+                    <div class="col-12">
+                      <button class="btn btn--primary btn-line btn-line-before" type="submit"><span>submit comment</span><i class="energia-arrow-right"></i></button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <!-- End .entry-comments-->
+          </div>
+          <!-- End .blog-entry-->
+        </div>
+        <!-- End .col-lg-8-->
+        <div class="col-12 col-lg-4">
+          <!-- Sidebar Blog -->
+          {% include 'blog/sidebar.html' %}
+          <!-- End .sidebar-->
+        </div>
+        <!-- End .col-lg-4-->
+      </div>
+      <!-- End .row-->
+    </div>
+    <!-- End .container-->
+  </section>
+{% endblock %}

@@ -1,0 +1,27 @@
+<!-- PageTitle Section-->
+<section class="page-title page-title-14" id="page-title">
+    <div class="page-title-wrap bg-overlay bg-overlay-dark-3">
+        <div class="bg-section"><img src="{% if hero_url %}{{hero_url }}{% else %}/static/images/page-titles/1.jpg{% endif %}" alt="Background" /></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6">
+                    <div class="title">
+                        <h1 class="title-heading">{{ title|default:'Appkings Solution'|truncatechars:20 }}</h1>
+                        <ol class="breadcrumb breadcrumb-light">
+                            <li class="breadcrumb-item"><a href="/">Home</a></li>
+                            {% if category %}
+                                <li class="breadcrumb-item"><a href="{{ category_url }}">{{ category }}</a></li>
+                            {% endif %}
+                            <li class="breadcrumb-item active" aria-current="page">{{ title|default:'Appkings Solution' }}</li>
+                        </ol>
+                        <!-- End .breadcrumb-->
+                    </div>
+                    <!-- End .title-->
+                </div>
+                <!-- End .col-12-->
+            </div>
+            <!-- End .row-->
+        </div>
+        <!-- End .container-->
+    </div>
+</section>

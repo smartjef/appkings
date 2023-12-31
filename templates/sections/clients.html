@@ -1,0 +1,22 @@
+{% if clients %}
+<!--Clients Section-->
+<section class="clients clients-carousel clients-1" id="clients-1">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3 class="d-none">Our Clients</h3>
+            </div>
+            <div class="col-12">
+                <div class="carousel owl-carousel" data-slide="6" data-slide-rs="2" data-autoplay="true"
+                    data-nav="false" data-dots="false" data-space="0" data-loop="true" data-speed="3000">
+                    {% for client in clients %}
+                    <div class="client"><a href="{{ client.website|default:'#' }}"></a><img src="{{ client.logo.url }}" alt="{{ client.title }}"/></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- End .row-->
+    </div>
+    <!-- End .container-->
+</section>
+{% endif %}

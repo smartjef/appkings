@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% block content %}
+  <!--Project Single Section-->
+  <section class="project-single" id="project-single">
+    <!-- Start .project-intro-->
+    <div class="project-intro"> 
+      <div class="container"> 
+        <div class="row"> 
+          <div class="project-img"> <img src="{% if product.image %}{{ product.image.cover_image.url }}{% else %}/static/images/page-titles/1.jpg{% endif %}" alt="{{ product.title }}"/>
+            <div class="project-panel">
+              <div class="project-panel-holder"> 
+                <div class="project-content"> 
+                  {% if product.tags.all %}
+                  <div class="project-cat">
+                    {% for tag in product.tags.all %}
+                      <a href="{{ tag.get_products_url }}">{{ tag.title }}</a>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                  <div class="project-title">
+                    <h4><a href="#">{{ product.title }}</a></h4>
+                  </div>
+                  <div class="project-desc">
+                    <p>{{ product.description|truncatechars:100 }}</p>
+                  </div>
+                  <div class="project-more"><a class="btn btn--primary" href="{% url 'core:contact' %}">request a quote <i class="energia-arrow-right"></i></a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End .row-->
+      </div>
+      <!-- End .container-->
+    </div>
+    <!-- End .project-intro-->
+    <!-- Start .project-overview-->
+    <div class="project-overview project-overview-1"> 
+      <div class="container mb-3"> 
+        <div class="heading heading-20">
+          <div class="row"> 
+            <div class="col-12 col-lg-5"> 
+              <p class="heading-subtitle">Description</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-lg-6">
+              <p class="heading-desc">{{ product.description|linebreaks|default:'No description' }}</p>
+            </div>
+            <div class="col-12 col-lg-5 offset-lg-1"> 
+              <div class="project-details">
+                <table class="table">
+                  <tbody>
+                    {% if product.clients.all %}
+                    <tr>
+                      <td class="name">clients:</td>
+                      <td class="value">
+                        {% for client in product.clients.all %}
+                          {{ client.title }}
+                        {% endfor %}
+                      </td>
+                    </tr>
+                    {% endif %}
+                    {% if product.services.all %}
+                    <tr>
+                      <td class="name">services:</td>
+                      <td class="value">
+                        {% for service in product.services.all %}
+                          {{ service.title }}, 
+                        {% endfor %}
+                      </td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+            </div>
+          </div>
+          <!-- End .row-->
+        </div>
+        <!-- End .heading-->
+      </div>
+      <!-- End .container-->
+    </div>
+    <!-- End .project-overview-->
+    <!-- Start .project-image-carousel-->
+    {% if product.related_images.all %}
+    <div class="project-image-carousel projects projects-gallery mb-3">
+      <div class="carousel owl-carousel carousel-dots carousel-navs" data-slide="4" data-slide-rs="3" data-center="data-center" data-autoplay="true" data-nav="true" data-dots="true" data-space="30" data-loop="true" data-speed="800">
+        {% for image in product.related_images.all %}
+        <div class=" ">
+          <div class="project-panel">
+            <div class="project-panel-holder">
+              <div class="project-img"><img src="{{ image.image.url }}" alt="{{ product.tite }}"/>
+                <div class="project-hover">
+                  <div class="project-action">
+                    <div class="project-zoom"><i class="far fa-eye"></i><a class="img-gallery-item" href="{{ image.image.url }}" title="{{ product.title }} image {{ forloop.counter }}"></a></div>
+                  </div>
+                  <!-- End .project-action -->
+                </div>
+                <!-- End .project-hover-->
+              </div>
+              <!-- End .project-img-->
+            </div>
+            <!-- End .project-panel-holder-->
+          </div>
+          <!-- End .project-panel-->
+        </div>
+        {% endfor %}
+      </div>
+      <!-- End .carousel-->
+    </div>
+    {% endif %}
+    <!-- End .project-image-carousel-->
+    {% include 'sections/features.html' %}
+
+    <!-- Projects Section-->
+    <section class="projects projects-standard projects-standard-2" id="projects-standard-2">
+      <div class="container">
+        <div class="heading heading-21 text-center">
+          <div class="row"> 
+            <div class="col-12 col-lg-6 offset-lg-3">
+              <h2 class="heading-title">related Services</h2>
+            </div>
+          </div>
+          <!-- End .row-->
+        </div>
+        <!-- End .heading-->
+        {% if product.services.all %}
+        <div class="carousel owl-carousel carousel-dots dots-side" data-slide="3" data-slide-rs="1" data-autoplay="true" data-nav="false" data-dots="true" data-space="30" data-loop="true" data-speed="800">
+            {% for service in product.services.all %}
+            <div>
+                <div class="service-panel">
+                    <div class="service-icon">
+                        <img src="{% if service.image %}{{ service.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="{{ service.title }}">
+                        <!-- <i class="flaticon-004-solar-panel"></i> -->
+                    </div>
+                    <div class="service-content">
+                        <h4><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title|truncatechars:27 }}</a></h4>
+                        <p>
+                            {{ service.description|truncatechars:330|default:'No description' }}
+                        </p>
+                    </div>
+                </div>
+                <!-- End .service-panel-->
+            </div>
+            {% endfor %}
+        </div>
+        <!-- End .carousel-->
+        <div class="row mt-3"> 
+          <div class="col-12"> 
+            <div class="projects-load-more"> <a class="btn btn--secondary" href="{% url 'core:services' %}">explore all services <i class="energia-arrow-right"></i></a></div>
+          </div>
+        </div>
+        <!-- End .row-->
+        {% endif %}
+      </div>
+      <!-- End .container-->
+    </section>
+  </section>
+{% endblock %}

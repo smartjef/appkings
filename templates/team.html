@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Team Section-->
+    {% if teams %}
+    <section class="team team-1" id="team">
+      <div class="container">
+        <div class="row">
+          {% for team in teams %}
+          <div class=" col-12 col-md-6 col-lg-4">
+            <div class="member">
+              <div class="member-img"><img src="{{ team.image.url }}" alt="{{ team.user.get_full_name|default:'No Name' }}"/></div>
+              <!-- End .member-img-->
+              <div class="member-content">
+                <div class="member-info"><a href="javascript:void(0)">{{ team.user.get_full_name|default:'No Name' }}</a>
+                  <h6>{{ team.position }}</h6>
+                </div>
+                <!-- End .member-info-->
+                <div class="member-social">
+                  <a href="javascript:void(0)"><i class="fab fa-facebook-f"></i></a>
+                  <a href="javascript:void(0)"><i class="fab fa-twitter"></i></a>
+                  <a href="javascript:void(0)"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                <!-- End .member-social-->
+              </div>
+              <!-- End .member-content-->
+            </div>
+            <!-- End .member-->
+          </div>
+          {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+{% endblock %}

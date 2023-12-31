@@ -1,0 +1,66 @@
+<!--Blog Section-->
+<section class="blog blog-1 blog-grid" id="blog-1">
+    <div class="container">
+        {% if title != 'Our Blog' %}
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <div class="heading heading-7 text-center">
+                    <h2 class="heading-title">recent articles</h2>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- End .row-->
+        {% if blogs %}
+            <div class="row">
+                {% for blog in blogs %}
+                <div class="col-12 col-lg-4">
+                    <div class="blog-entry" data-hover="">
+                        <div class="entry-content">
+                            <div class="entry-meta">
+                                <div class="entry-date"><span class="day">{{ blog.published_at|date:'M' }} {{ blog.published_at|date:'m' }}</span><span class="year">{{ blog.published_at|date:'Y' }}</span></div>
+                                <!-- End .entry-date		-->
+                                <div class="entry-author">
+                                    <p>{{ blog.author.get_full_name|default:'No Name' }}</p>
+                                </div>
+                            </div>
+                            <div class="entry-title">
+                                <h4><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:55 }}</a></h4>
+                            </div>
+                            <div class="entry-img-wrap">
+                                <div class="entry-img"><a href="{{ blog.get_absolute_url }}"><img src="{% if blog.image %}{{ blog.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" class="img-fluid" alt="{{ blog.title }}" /></a></div>
+                                {% if blog.tags.all %}
+                                <div class="entry-category">
+                                    {% for tag in blog.tags.all %}
+                                        <a href="{{ tag.get_blogs_url }}">{{ tag.title }}</a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- End .entry-img-->
+                            <div class="entry-bio">
+                                <p>
+                                    {{ blog.description|truncatechars:300 }}
+                                </p>
+                            </div>
+                            <div class="entry-more"> <a class="btn btn--white btn-bordered" href="{{ blog.get_absolute_url }}">read more <i class="energia-arrow-right"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- End .entry-content-->
+                </div>
+                {% endfor %}
+            </div>
+            {% if title != 'Our Blog' %}
+            <div class="row">
+                <div class="col-12">
+                    <div class="more-blog"><a href="{% url 'core:blog' %}">find out more blogs!</a></div>
+                </div>
+            </div>
+            {% endif %}
+            <!-- End .row-->
+        {% else %}
+        <p class="text-center">No blog post found</p>
+        {% endif %}
+    </div>
+    <!-- End .container-->
+</section>

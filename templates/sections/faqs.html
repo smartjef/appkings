@@ -1,0 +1,70 @@
+{% if faqs %}
+<!-- Faqs Section -->
+<section class="faqs faqs-1 bg-overlay bg-overlay-theme" id="faqs-1">
+    <div class="bg-section"> <img src="/static/images/video/1.jpg" alt="background" /></div>
+    <div class="container">
+        <div class="heading heading-15 heading-light">
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <p class="heading-subtitle">Insights into AppKings Solutions: Your Questions Answered</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-lg-5">
+                    <h2 class="heading-title">Empowering Independence with Cutting-Edge Solutions!</h2>
+                </div>
+                <div class="col-12 col-lg-6 offset-lg-1">
+                    <p class="heading-desc">Discover the transformative power of AppKings Solutions in the technology landscape. Gain valuable insights from our clients and find answers to commonly asked questions about our innovative solutions.</p>
+                    <div class="faqs-action"><a class="btn btn--white" href="{% url 'core:about' %}">Learn More <i
+                                class="energia-arrow-right"></i></a><a class="btn btn--bordered btn--white" href="{% url 'core:faqs' %}">Explore FAQs</a></div>
+                </div>
+            </div>                       
+            <!-- End .row-->
+        </div>
+        <!-- End .heading-->
+        <div class="row">
+            <div class="col-12 col-lg-5">
+                <div class="img-hotspot img-hotspot-3">
+                    <div class="img-hotspot-wrap">
+                        <div class="img-hotspot-bg"> <img src="/static/images/background/world-map-white.png"
+                                alt="image" /></div>
+                        <div class="img-hotspot-pointers">
+                            <div class="img-hotspot-pointer" data-spot-x="15%" data-spot-y="29%">
+                                <div class="pointer-icon"></div>
+                                <div class="info right" data-info-x="18px" data-info-y="-97px"><span>AppKings exceeded expectations hence their contact was renewed for further 2 years</span></div>
+                            </div>
+                            <div class="img-hotspot-pointer" data-spot-x="48%" data-spot-y="48%">
+                                <div class="pointer-icon"></div>
+                                <div class="info left" data-info-x="-160px" data-info-y="-97px"><span>I can satisfactorily confirm that AppKings solutions are efficient and secure.</span></div>
+                            </div>
+                            <div class="img-hotspot-pointer" data-spot-x="68%" data-spot-y="23%">
+                                <div class="pointer-icon"></div>
+                                <div class="info left" data-info-x="-160px" data-info-y="-97px"><span>I do confirm that their software solutions are efficient and secure.</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 offset-lg-1">
+                <div class="accordion accordion-light" id="accordion03">
+                    {% for faq in faqs %}
+                    <div>
+                        <div class="card">
+                            <div class="card-heading"><a class="card-link collapsed" data-hover=""
+                                    data-bs-toggle="collapse" role="button" aria-expanded="false"
+                                    aria-controls="collapse01-{{ forloop.counter }}" href="#collapse01-{{ forloop.counter }}">{{ faq.question|truncatechars:40 }}</a>
+                            </div>
+                            <div class="collapse" id="collapse01-{{ forloop.counter }}" data-bs-parent="#accordion03">
+                                <div class="card-body">{{ faq.answer|truncatechars:200 }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <!-- End .row-->
+    </div>
+    <!-- End .container-->
+</section>
+{% endif %}

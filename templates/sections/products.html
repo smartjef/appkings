@@ -1,0 +1,58 @@
+<!--Products Section-->
+<section class="projects projects-modern projects-modern-1" id="projects-modern-1">
+    <div class="container">
+        {% if title != 'Our Products' %}
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <div class="heading heading-5 text-center">
+                    <p class="heading-subtitle">Explore Our Range of Innovative Products</p>
+                    <h2 class="heading-title">Our Products</h2>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <!-- End .row-->
+        <div class="row">
+            <div class="col-12">
+                {% if products %}
+                <div class="carousel owl-carousel carousel-dots" data-slide="3" data-slide-rs="1" data-autoplay="true"
+                    data-nav="false" data-dots="true" data-space="30" data-loop="true" data-speed="3000">
+                    {% for product in products %}
+                        <div>
+                            <div class="project-panel" data-hover="">
+                                <div class="project-panel-holder">
+                                    <div class="project-img"><a class="link" href="{{ product.get_absolute_url }}"></a>
+                                        <img src="{% if product.image %}{{ product.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" alt="{{ project.title }}" />
+                                    </div>
+                                    <!-- End .project-img-->
+                                    <div class="project-content">
+                                        {% if product.tags.all %}
+                                        <div class="project-cat">
+                                            {% for tag in product.tags.all %}
+                                                <a href="{{ tag.get_products_url }}">{{ tag }}</a>
+                                            {% endfor %}
+                                        </div>
+                                        {% endif %}
+                                        <div class="project-title">
+                                            <h4><a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:60 }}</a></h4>
+                                        </div>
+                                        <div class="project-desc">
+                                            <p>{{ product.description|truncatechars:230 }}</p>
+                                        </div>
+                                        <div class="project-more"> <a class="btn btn--bordered btn--white" href="{{ product.get_absolute_url }}">explore more <i class="energia-arrow-right"></i></a></div>
+                                    </div>
+                                    <!-- End .project-content -->
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-center">No Products Found</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- End .row-->
+    </div>
+    <!-- End .container-->
+</section>

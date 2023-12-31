@@ -1,0 +1,98 @@
+<header class="header header-light header-topbar header-topbar1 header-shadow" id="navbar-spy">
+    <div class="top-bar">
+        <div class="block-left">
+            <div class="top-contact">
+                <div class="contact-infos"><i class="energia-phone-Icon text-white"></i>
+                    <div class="contact-body">
+                        <p><a href="tel:+254700191991">+254700191991</a></p>
+                    </div>
+                </div>
+                <div class="contact-infos"><i class="energia-email--icon text-white"></i>
+                    <div class="contact-body">
+                        <p><a href="mailto:info@appkings.co.ke" class="text-lowercase">info@appkings.co.ke </a></p>
+                    </div>
+                </div>
+                <div class="contact-infos"><i class="energia-clock-Icon text-white"></i>
+                    <div class="contact-body">
+                        <p>hours: Mon-Fri: 8am – 5pm </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="block-right">
+            <!-- Start .social-links-->
+            <div class="social-links">
+                <a class="share-facebook text-white" href="https://web.facebook.com/appkingsSolutionsLtd/" target="_blank"><i class="energia-facebook"></i></a>
+                <a class="share-instagram text-white" href="https://twitter.com/appkingss" target="_blank"><i class="energia-twitter"></i></a>
+                <a class="share-twitter text-white" href="" target="_blank"><i class="energia-youtube"></i></a>
+            </div>
+            <!-- End .social-links-->
+            <div class="topbar-links"><a href="https://support.appkings.co.ke">support</a><a
+                    href="{% url 'core:survey' %}">Survey</a><a href="{% url 'core:faqs' %}">FAQs</a></div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-sticky" id="primary-menu"><a class="navbar-brand"
+            href="/"><img class="logo logo-dark" src="/static/images/logo/logo-dark.png"
+                alt="Energia Logo" /><img class="logo logo-mobile" src="/static/images/logo/logo-mobile.png"
+                alt="Energia Logo" /></a>
+        <div class="module-holder module-holder-phone">
+            <div class="module module-search">
+                <div class="module-icon module-icon-search"><i class="energia-search-Icon"></i></div>
+            </div>
+            <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item active" data-hover=""><a href="/" class="active"><span>Home</span></a></li>
+                <li class="nav-item has-dropdown" data-hover=""><a class="dropdown-toggle" href="#"
+                        data-toggle="dropdown"><span>About</span></a>
+                    <ul class="dropdown-menu">
+                        <li class="nav-item"><a href="{% url 'core:about' %}"><span>About us</span></a></li>
+                        <li class="nav-item"><a href="{% url 'core:awards' %}"><span>Awards & recognition</span></a></li>
+                        <li class="nav-item"><a href="{% url 'core:services' %}"><span>Services</span></a></li>
+                        <li class="nav-item"><a href="{% url 'core:faqs' %}"><span>FAQs</span></a></li>
+                    </ul>
+                </li>
+                {% if services %}
+                <li class="nav-item has-dropdown" id="departments" data-hover=""><a class="dropdown-toggle" href="#" data-toggle="dropdown"><span>Services</span></a>
+                    <ul class="dropdown-menu">
+                        {% for service in services %}
+                            <li class="nav-item"><a href="{{ service.get_absolute_url }}"><span>{{ service.title|truncatechars:45 }}</span></a></li>
+                        {% endfor %}
+                        <li class="nav-item"><a href="{% url 'core:services' %}"><span>View all</span></a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if products %}
+                <li class="nav-item has-dropdown" data-hover=""><a href="{% url 'core:products' %}" class="dropdown-toggle" data-toggle="dropdown"><span>Products</span></a>
+                    <ul class="dropdown-menu">
+                        {% for product in products %}
+                            <li class="nav-item"><a href="{{ product.get_absolute_url }}"><span>{{ product.title|truncatechars:45 }}</span></a></li>
+                        {% endfor %}
+                        <li class="nav-item"><a href="{% url 'core:products' %}"><span>View all</span></a></li>
+                    </ul>
+                </li>
+                {% endif %}
+                <li class="nav-item" id="contact" data-hover=""><a href="{% url 'core:blog' %}"><span>Blog</span></a></li>
+                <li class="nav-item" id="contact" data-hover=""><a href="{% url 'core:contact' %}"><span>Let's Talk</span></a></li>
+            </ul>
+            <div class="module-holder">
+                <div class="module module-search">
+                    <div class="module-icon module-icon-search"><i class="energia-search-Icon"></i></div>
+                </div>
+                <div class="module module-cart">
+                    <div class="module-icon module-icon-cart"><a href="tel:+254790193045"><i class="fas fa-headset"></i></a><span
+                            class="title">24/7 Support</span>
+                    </div>
+                </div>
+                <div class="module-contact"><a class="btn btn--primary " href="{% url 'core:contact' %}">
+                        request a quote<i class="energia-arrow-right"></i></a></div>
+            </div>
+            <!--  End .module-holder-->
+        </div>
+        <!--  End .navbar-collapse-->
+    </nav>
+    <!--  End .navbar-->
+</header>

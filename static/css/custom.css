@@ -1,0 +1,24 @@
+:root{
+    --global--color-primary   : #f25022;
+	--global--color-primary-90: rgba(242, 80, 34, 0.9);
+	--global--color-primary-70: rgba(242, 80, 34, 0.7);
+	--global--color-heading   : #253745;
+	--global--color-secondary : #2b3e4b;
+	--global--color-body      : #9b9b9b;
+}
+
+.bg-overlay-theme:before {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ec643fb4), color-stop(82%, #e95229));
+	background-image: -o-linear-gradient(top, #ec643fb4 0%, #e95229 82%);
+	background-image: linear-gradient(180deg, #ec643fb4 0%, #e95229 82%);
+}
+
+.entry-category {
+	background-color: var(--global--color-primary) !important;
+}
+
+.widget-reservation::before {
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(20%, #ec643fb4), to(#e95229)) !important;
+    background-image: -o-linear-gradient(top, #ec643fb4 20%, #e95229 100%) !important;
+    background-image: linear-gradient(180deg, #ec643fb4 20%, #e95229 100%) !important;
+}
