@@ -1,0 +1,24 @@
+{% if teams %}
+<section class="team team-1" id="team">
+    <div class="container">
+        <div class="row">
+            {% for team in teams %}
+            <div class=" col-12 col-md-6 col-lg-4">
+                <div class="member">
+                    <div class="member-img"><img src="{{ team.image.url }}" alt="{{ team.user.get_full_name|default:'No Name' }}" /></div>
+                    <div class="member-content">
+                        <div class="member-info"><a href="mailto:{{ team.user.email }}">{{ team.user.get_full_name|default:'No Name' }}</a>
+                            <h6>{{ team.position }}</h6>
+                        </div>
+                        <div class="member-social">
+                            <a href="tel:{{ team.phone_number|default:'' }}"><i class="fa fa-phone"></i></a>
+                            <a href="mailto:{{ team.user.email|default:'' }}"><i class="fa fa-envelope"></i></a>
+                            <a href="{{ team.linkedin.url|default:'' }}"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</section>
+{% endif %}

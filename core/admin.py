@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
-from .models import RelatedImage, Review, Blog, BlogComment, Patner, PrimaryImage, Product, Client, Award, FAQ, Contact, Service, Tag, Survey
+from .models import RelatedImage, Review, Blog, BlogComment, Patner, PrimaryImage, Product, Client, Award, FAQ, Contact, Service, Tag, Survey, Gallery, GalleryImage, Team
 from django.http import HttpResponse
 import csv
 
@@ -141,5 +141,23 @@ class SurvayAdmin(admin.ModelAdmin):
     list_filter = ['created_at', 'discover_method', 'recommend_to_friends']
     list_per_page = 20
     readonly_fields = ['name', 'email', 'phone_number', 'discover_method', 'liked_about_us', 'recommend_to_friends', 'improvements_needed', 'additional_suggestions', 'created_at']
-    list_display_links = ['discover_method',]
     actions = [export_selected_to_csv]
+
+@admin.register(Team)
+class TeamAdmin(admin.ModelAdmin):
+    list_display = ['order', 'user', 'position', 'image', 'is_active', 'created_at', 'updated_at']
+    search_fields = ['user__first_name', 'user__last_name', 'position']
+    list_filter = ['is_active', 'created_at', 'updated_at']
+    list_per_page = 20
+    list_display_links = ['user',]
+
+class GalleryImageInline(admin.TabularInline):
+    model = GalleryImage
+    extra = 0
+
+@admin.register(Gallery)
+class GalleryAdmin(admin.ModelAdmin):
+    list_display = ['id', 'is_active', 'created_at', 'updated_at']
+    list_filter = ['is_active', 'created_at', 'updated_at']
+    list_per_page = 20
+    inlines = [GalleryImageInline]

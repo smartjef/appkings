@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse 
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 class PrimaryImage(models.Model):
@@ -146,10 +147,10 @@ class FAQ(models.Model):
 class Contact(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=200)
-    phone_number = models.CharField(max_length=20, null=True, blank=True)
+    phone_number = PhoneNumberField(null=True, blank=True)
     subject = models.CharField(max_length=120)
     message = models.TextField(max_length=500)
-    is_addressed = models.BooleanField(default=True)
+    is_addressed = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -225,7 +226,7 @@ recommend_choices = (
 class Survey(models.Model):
     name = models.CharField(max_length=120, verbose_name="Name")
     email = models.EmailField(max_length=255)
-    phone_number = models.CharField(max_length=15, verbose_name="Phone Number")
+    phone_number = PhoneNumberField()
     discover_method = models.CharField(
         max_length=50, choices=discover_choices, verbose_name="How did you discover Appkings Solution?"
     )
@@ -242,3 +243,44 @@ class Survey(models.Model):
     
     class Meta:
         ordering = ('-created_at',)
+
+class Gallery(models.Model):
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "Gallery"
+    
+    class Meta:
+        ordering = ('-created_at',)
+
+class GalleryImage(models.Model):
+    gallery = models.ForeignKey(Gallery, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to="gallery/")
+    is_active = models.BooleanField(default=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.image.name
+    
+    class Meta:
+        ordering = ('-created_at',)
+
+class Team(models.Model):
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE, related_name='team')
+    image = models.ImageField(upload_to='team/')
+    phone_number = PhoneNumberField()
+    linkedin = models.URLField(null=True, blank=True)
+    position = models.CharField(max_length=120, help_text='e.g Chief Executive Officer')
+    order = models.PositiveSmallIntegerField(unique=True, help_text='e.g 1')
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+    
+    class Meta:
+        ordering = ['order']

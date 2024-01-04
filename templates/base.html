@@ -12,9 +12,9 @@
 </head>
 
 <body>
-    <div class="preloader">
+    <!-- <div class="preloader">
         <div class="dual-ring"></div>
-    </div>
+    </div> -->
 
     <div class="wrapper clearfix" id="wrapperParallax">
 
@@ -25,8 +25,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-12 col-md-12 col-lg-8 offset-lg-2">
-                            <form class="form-search">
-                                <input class="form-control" type="text" placeholder="type words then enter" />
+                            <form class="form-search" action="{% url 'core:search' %}">
+                                <input class="form-control" type="search" name="q" placeholder="Search our database ..." />
                                 <button></button>
                             </form>
                             <!-- End .form-search -->

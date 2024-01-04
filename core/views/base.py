@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from ..models import FAQ, Client, Review, Award
+from ..models import FAQ, Client, Review, Award, GalleryImage, Gallery, Team, Blog, Product, Service
 from ..forms import ContactForm, SurveyForm
 from django.contrib import messages
+from django.http import Http404
 
 def index(request):
     context = {
@@ -20,12 +21,15 @@ def about(request):
 
 def contact(request):
     if request.method == 'POST':
-        form = ContactForm(request.POST)
-        if form.is_valid():
-            contact = form.save()
-            contact.save()
-            messages.success(request, 'Form submitted successfully.')
-            return redirect('core:index')
+        try:
+            form = ContactForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Form submitted successfully.')
+                return redirect('core:index')
+        except Exception as e:
+            messages.success(request, f'Error:{e}.')
+            return redirect('core:contact')
     else:
         form = ContactForm()
 
@@ -82,3 +86,53 @@ def faq(request):
         'faqs': FAQ.objects.filter(is_active=True),
     }
     return render(request, 'faqs.html', context)
+
+def team(request):
+    teams = Team.objects.filter(is_active=True)
+    if not teams:
+        raise Http404
+    
+    context = {
+        'title': 'Our Team',
+        'teams': teams
+
+    }
+    return render(request, 'team.html', context)
+
+def gallery(request):
+    if not Gallery.objects.filter(is_active=True).first():
+        raise Http404
+
+    context = {
+        'title': 'Our Gallery',
+        'images': GalleryImage.objects.filter(is_active=True)
+    }
+    return render(request, 'gallery.html', context)
+
+def search(request):
+    title = 'Search ...'
+    services = blogs = teams = clients = products = awards = faqs = None
+    query = request.GET.get('q')
+
+    if query:
+        title = f"Results for '{query}'"
+        services = Service.objects.filter(title__icontains=query, is_active=True) or Service.objects.filter(description__icontains=query, is_active=True)
+        blogs = Blog.objects.filter(title__icontains=query, is_published=True) or Blog.objects.filter(description__icontains=query, is_published=True)
+        teams = Team.objects.filter(user__first_name__icontains=query, is_active=True) or Team.objects.filter(user__last_name__icontains=query, is_active=True) or Team.objects.filter(position__icontains=query, is_active=True)
+        clients = Client.objects.filter(title__icontains=query, is_active=True)
+        products = Product.objects.filter(title__icontains=query, is_active=True) or Product.objects.filter(description__icontains=query, is_active=True)
+        awards = Award.objects.filter(title__icontains=query)
+        faqs = FAQ.objects.filter(question__icontains=query)
+
+    context = {
+        'title': title,
+        'services': services,
+        'blogs': blogs,
+        'teams': teams,
+        'clients': clients,
+        'products': products,
+        'awards': awards,
+        'faqs': faqs,
+    }
+
+    return render(request, 'search.html', context)

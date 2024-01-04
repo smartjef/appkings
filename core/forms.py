@@ -1,11 +1,6 @@
 from django import forms
 from .models import Contact, BlogComment, Survey, discover_choices, recommend_choices
-from django.core.validators import RegexValidator
-
-phone_number_validator = RegexValidator(
-    regex=r'^254\d+$',
-    message='Please include country code e.g 254'
-)
+from phonenumber_field.formfields import PhoneNumberField
 
 class CommentForm(forms.ModelForm):
     name = forms.CharField(
@@ -15,7 +10,7 @@ class CommentForm(forms.ModelForm):
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email*'})
     )
     message = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Comment*', 'style': 'line-height: 1em;'})
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Comment*', 'style': 'line-height: 1.1em;'})
     )
 
     class Meta:
@@ -33,14 +28,12 @@ class ContactForm(forms.ModelForm):
     subject = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Subject*'})
     )
-    phone_number = forms.EmailField(
-        max_length=15,
-        validators=[phone_number_validator],
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number e.g +254...'}),
+    phone_number = PhoneNumberField(
+        widget=forms.TextInput(attrs={'type':'tel', 'class': 'form-control', 'placeholder': 'Phone number e.g +...'}),
         required=False
     )
     message = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Message*', 'style': 'line-height: 1em;'})
+        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Message*', 'style': 'line-height: 1.1em;'})
     )
     class Meta:
         model = Contact
@@ -58,10 +51,8 @@ class SurveyForm(forms.ModelForm):
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Enter your email'}),
         label='Email',
     )
-    phone_number = forms.CharField(
-        max_length=15,
-        validators=[phone_number_validator],
-        widget=forms.TextInput(attrs={'type':'tel', 'class': 'form-control', 'placeholder': 'Enter your phone number'}),
+    phone_number = PhoneNumberField(
+        widget=forms.TextInput(attrs={'type':'tel', 'class': 'form-control', 'placeholder': 'Enter your phone number, e.g +...'}),
         label='Phone Number',
     )
     discover_method = forms.ChoiceField(
@@ -71,7 +62,7 @@ class SurveyForm(forms.ModelForm):
     )
 
     liked_about_us = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0'}),
+        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0', 'style': 'line-height: 1.1em;'}),
         label='What did you like About Us?',
     )
 
@@ -82,12 +73,12 @@ class SurveyForm(forms.ModelForm):
     )
 
     improvements_needed = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0'}),
+        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0', 'style': 'line-height: 1.1em;'}),
         label='What would you like Us to adjust or improve on?',
     )
 
     additional_suggestions = forms.CharField(
-        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0'}),
+        widget=forms.Textarea(attrs={'rows': 2, 'class': 'form-control my-2 br-0', 'style': 'line-height: 1.1em;'}),
         label='Any Other Suggestions for Us?',
     )
     class Meta:

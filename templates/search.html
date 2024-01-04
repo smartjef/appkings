@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'sections/services.html' %}
+    {% include 'sections/products.html' %}
+    {% include 'sections/clients.html' %}
+    {% include 'sections/faqs.html' %}
+    {% include 'sections/blog.html' %}
+    {% include 'sections/team.html' %}
+
+    <section class="awards awards awards-1" id="awards">
+        <div class="container"> 
+          <div class="row"> 
+            <div class="col-12 col-lg-6 offset-lg-3">
+              <div class="heading heading-17 text-center">
+                <p class="heading-subtitle">Explore the Recognition of our Excellence</p>
+                <h2 class="heading-title">Our Awards & Recognition</h2>
+              </div>            
+            </div>
+          </div>
+          <div class="row">
+            {% if awards %}
+              {% for award in awards %}
+                <div class="col-12 col-md-6 col-lg-4">
+                  <div class="award">
+                    <div class="award-img"><img src="{{ award.image.url }}" alt="{{ award.title }}"/></div>
+                    <!-- End .work-img-->
+                    <div class="award-content">
+                      <h4 class="award-title"><a href="#">{{ award.title }}</a></h4>
+                      <p class="award-desc">{{ award.summary|default:'No description' }}</p>
+                    </div>
+                    <!-- End .award-content-->
+                  </div>
+                  <!-- End .award-->
+                </div>
+              {% endfor %}
+            {% else %}
+            <p class="text-center">No Award Uploaded</p>
+            {% endif %}
+          </div>
+          <!-- End .row-->
+        </div>
+        <!-- End .container-->
+      </section>
+{% endblock %}
