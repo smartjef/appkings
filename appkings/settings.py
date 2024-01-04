@@ -7,9 +7,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '52.147.195.49',
+    '127.0.0.1',
+]
 
 ADMINS = [
     ('Admin', 'o.jeff3.a@gmail.com'),
