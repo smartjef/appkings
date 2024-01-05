@@ -62,7 +62,7 @@ class Client(models.Model):
     website = models.URLField(max_length=150, unique=True, null=True, blank=True)
     logo = models.ImageField(upload_to='clients/')
     is_active = models.BooleanField(default=True)
-    description = models.TextField(help_text='include the features here', max_length=400)
+    description = models.TextField(help_text='include the features here', max_length=400, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -163,7 +163,7 @@ class Contact(models.Model):
 class Review(models.Model):
     name = models.CharField(max_length=120)
     ratings = models.PositiveSmallIntegerField(choices=((1,1),(2,2),(3,3),(4,4),(5,5)), default=5)
-    position = models.CharField(max_length=20)
+    position = models.CharField(max_length=120)
     image = models.ImageField(upload_to='reviews/', null=True, blank=True)
     message = models.TextField(max_length=300)
     is_active = models.BooleanField(default=True)
