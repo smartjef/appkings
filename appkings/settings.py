@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '52.147.195.49',
@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'phonenumber_field',
+    'ckeditor',
 ]
 
 MIDDLEWARE = [
@@ -108,10 +109,13 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static/')
-]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+CKEDITOR_UPLOAD_PATH = "media/uploads"
+CKEDITOR_BASEPATH =  os.path.join(BASE_DIR,"/static/ckeditor/ckeditor/")
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static/')
+# ]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')

@@ -37,7 +37,7 @@
                                             <h4><a href="{{ product.get_absolute_url }}">{{ product.title|truncatechars:60 }}</a></h4>
                                         </div>
                                         <div class="project-desc">
-                                            <p>{{ product.description|truncatechars:230 }}</p>
+                                            <p>{{ product.get_overview }}</p>
                                         </div>
                                         <div class="project-more"> <a class="btn btn--bordered btn--white" href="{{ product.get_absolute_url }}">explore more <i class="energia-arrow-right"></i></a></div>
                                     </div>

@@ -1,6 +1,9 @@
 from django.db import models
 from django.urls import reverse 
 from phonenumber_field.modelfields import PhoneNumberField
+from ckeditor.fields import RichTextField
+from django.template.defaultfilters import striptags, escape
+
 
 # Create your models here.
 class PrimaryImage(models.Model):
@@ -36,7 +39,7 @@ class Service(models.Model):
     slug = models.SlugField(max_length=150, unique=True)
     image = models.ForeignKey(PrimaryImage, null=True, blank=True, on_delete=models.CASCADE ,related_name='services')
     is_active = models.BooleanField(default=True)
-    description = models.TextField()
+    description = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -45,6 +48,12 @@ class Service(models.Model):
     
     def get_absolute_url(self):
         return reverse('core:service_detail', kwargs={'slug':self.slug})
+    
+    def get_overview(self):
+        cleaned_description = striptags(self.description)[:200]
+        cleaned_description = escape(cleaned_description)
+        return cleaned_description
+
     
     class Meta:
         ordering = ('-created_at',)
@@ -62,7 +71,7 @@ class Client(models.Model):
     website = models.URLField(max_length=150, unique=True, null=True, blank=True)
     logo = models.ImageField(upload_to='clients/')
     is_active = models.BooleanField(default=True)
-    description = models.TextField(help_text='include the features here', max_length=400)
+    description = RichTextField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -80,7 +89,7 @@ class Product(models.Model):
     clients = models.ManyToManyField(Client, blank=True,  related_name='products')
     services = models.ManyToManyField(Service, blank=True,  related_name='products')
     tags = models.ManyToManyField(Tag, blank=True,  related_name='products')
-    description = models.TextField()
+    description = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -89,6 +98,11 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse('core:product_detail', kwargs={'slug':self.slug})
+    
+    def get_overview(self):
+        cleaned_description = striptags(self.description)[:200]
+        cleaned_description = escape(cleaned_description)
+        return cleaned_description
     
     class Meta:
         ordering = ('-created_at',)
@@ -121,7 +135,7 @@ class Patner(models.Model):
 class Award(models.Model):
     title = models.CharField(max_length=120, unique=True)
     image = models.ImageField(upload_to='awards/', verbose_name='Certificate')
-    summary = models.TextField(null=True, blank=True, max_length=250)
+    summary = RichTextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -133,12 +147,17 @@ class Award(models.Model):
 
 class FAQ(models.Model):
     question = models.CharField(max_length=120, unique=True)
-    answer = models.TextField(null=True, blank=True, max_length=255)
+    answer = RichTextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.question
+    
+    def get_overview(self):
+        cleaned_description = striptags(self.answer)[:200]
+        cleaned_description = escape(cleaned_description)
+        return cleaned_description
     
     class Meta:
         ordering = ('-created_at',)
@@ -184,7 +203,7 @@ class Blog(models.Model):
     is_published = models.BooleanField(default=True)
     published_at = models.DateField()
     tags = models.ManyToManyField(Tag, blank=True,  related_name='blogs')
-    description = models.TextField()
+    description = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -194,6 +213,11 @@ class Blog(models.Model):
     def get_absolute_url(self):
         return reverse('core:blog_detail', kwargs={'slug':self.slug})
     
+    def get_overview(self):
+        cleaned_description = striptags(self.description)[:200]
+        cleaned_description = escape(cleaned_description)
+        return cleaned_description
+    
     class Meta:
         ordering = ('-created_at',)
 
@@ -201,7 +225,7 @@ class BlogComment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=120)
     email = models.EmailField(max_length=120)
-    message = models.TextField(max_length=255)
+    message = RichTextField()
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

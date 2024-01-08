@@ -64,7 +64,7 @@
                     {% if service.image %}
                       <img src="{{ service.image.cover_image.url }}" alt="{{ service.title }}">
                     {% endif %}
-                    <p class="entry-desc">{{ service.description|linebreaks|default:'No description' }}</p>
+                    <p class="entry-desc">{{ service.description|safe|default:'No description' }}</p>
                   </div>
                   {% if service.products.all %}
                   <div class="entry-infos projects projects-grid projects-grid-2">

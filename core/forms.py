@@ -1,6 +1,7 @@
 from django import forms
 from .models import Contact, BlogComment, Survey, discover_choices, recommend_choices
 from phonenumber_field.formfields import PhoneNumberField
+from ckeditor.widgets import CKEditorWidget
 
 class CommentForm(forms.ModelForm):
     name = forms.CharField(
@@ -9,9 +10,7 @@ class CommentForm(forms.ModelForm):
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Email*'})
     )
-    message = forms.CharField(
-        widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Comment*', 'style': 'line-height: 1.1em;'})
-    )
+    message = forms.CharField(widget=CKEditorWidget())
 
     class Meta:
         model = BlogComment

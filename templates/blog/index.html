@@ -2,11 +2,11 @@
 {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-6 col-lg-8">
+    <div class="col-md-6 col-lg-8 col-sm-12">
       {% if blogs %}
-      <div class="row">
+      <div class="d-flex no-wrap">
         {% for blog in blogs %}
-        <div class="col-12 col-lg-6 col-md-12">
+        <div class="col-lg-6 col-md-12">
             <div class="blog-entry" data-hover="">
                 <div class="entry-content">
                     <div class="entry-meta">
@@ -30,10 +30,8 @@
                         {% endif %}
                     </div>
                     <!-- End .entry-img-->
-                    <div class="entry-bio">
-                        <p>
-                            {{ blog.description|truncatechars:300 }}
-                        </p>
+                    <div class="entry-bio text-wrap">
+                      <p>{{ blog.get_overview|default:'No description' }}</p>
                     </div>
                     <div class="entry-more"> <a class="btn btn--white btn-bordered" href="{{ blog.get_absolute_url }}">read more <i class="energia-arrow-right"></i></a></div>
                 </div>

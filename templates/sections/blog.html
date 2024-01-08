@@ -40,7 +40,7 @@
                             <!-- End .entry-img-->
                             <div class="entry-bio">
                                 <p>
-                                    {{ blog.description|truncatechars:300 }}
+                                    {{ blog.get_overview }}
                                 </p>
                             </div>
                             <div class="entry-more"> <a class="btn btn--white btn-bordered" href="{{ blog.get_absolute_url }}">read more <i class="energia-arrow-right"></i></a></div>
