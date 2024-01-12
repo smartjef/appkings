@@ -17,7 +17,7 @@
                         </div>
                     </div>
                     <div class="entry-title">
-                        <h4><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:55 }}</a></h4>
+                        <h4 class="text-wrap"><a href="{{ blog.get_absolute_url }}">{{ blog.title|truncatechars:55 }}</a></h4>
                     </div>
                     <div class="entry-img-wrap">
                         <div class="entry-img"><a href="{{ blog.get_absolute_url }}"><img src="{% if blog.image %}{{ blog.image.front_image.url }}{% else %}/static/images/video/1.jpg{% endif %}" class="img-fluid" alt="{{ blog.title }}" /></a></div>
