@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="careers careers-1" id="careers">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <div class="heading heading-19 text-center">
+                    <p class="heading-subtitle">Carrers</p>
+                    <h2 class="heading-title">Find Job Openings</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                {% if jobs %}
+                <div class="carousel owl-carousel carousel-dots owl-loaded owl-drag" data-slide="3" data-slide-rs="1"
+                    data-autoplay="true" data-nav="false" data-dots="true" data-space="30" data-loop="true"
+                    data-speed="800">
+                    <div class="owl-stage-outer">
+                        <div class="owl-stage"
+                            style="transform: translate3d(-5082px, 0px, 0px); transition: all 0.25s ease 0s; width: 8712px;">
+                            {% for job in jobs %}
+                            <div class="owl-item cloned" style="width: 696px; margin-right: 30px;">
+                                <div class="career-item">
+                                    <div class="career-item-wrap">
+                                        <div class="career-meta">
+                                            <p class="career-type">{{ job.job_type }}</p>
+                                            <p class="career-place">{{ job.location }}</p>
+                                        </div>
+                                        <!-- End .career-meta-->
+                                        <div class="career-content">
+                                            <h4 class="career-title">{{ job.title }}</h4>
+                                            <p class="career-desc">
+                                                {{ job.get_overview }}
+                                            </p>
+                                            <a class="career-more btn btn--secondary" href="{{ job.get_absolute_url }}">Apply Now <i class="energia-arrow-right"></i></a>
+                                        </div>
+                                        <!-- End .career-content -->
+                                    </div>
+                                    <!-- End .career-item-wrap-->
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="owl-nav disabled">
+                        <button type="button" role="presentation" class="owl-prev"><span aria-label="Previous">
+                                << /span></button>
+                        <button type="button" role="presentation" class="owl-next"><span
+                                aria-label="Next">></span></button>
+                    </div>
+                </div>
+                {% else %}
+                <p class="text-center">No Job openings currently</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- End .row-->
+    </div>
+    <!-- End .container-->
+</section>
+{% endblock %}

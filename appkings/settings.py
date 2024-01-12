@@ -26,9 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
+    #third party
     'phonenumber_field',
     'ckeditor',
+    #localapp
+    'core',
+    'careers',
 ]
 
 MIDDLEWARE = [
@@ -110,9 +113,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 CKEDITOR_UPLOAD_PATH = "media/uploads"
 CKEDITOR_BASEPATH =  os.path.join(BASE_DIR,"/static/ckeditor/ckeditor/")
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # STATICFILES_DIRS = [
 #     os.path.join(BASE_DIR, 'static/')
 # ]

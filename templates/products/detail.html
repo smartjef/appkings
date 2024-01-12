@@ -21,7 +21,7 @@
                     <h4><a href="#">{{ product.title }}</a></h4>
                   </div>
                   <div class="project-desc">
-                    <p>{{ product.description|truncatechars:100 }}</p>
+                    <p>{{ product.get_overview }}</p>
                   </div>
                   <div class="project-more"><a class="btn btn--primary" href="{% url 'core:contact' %}">request a quote <i class="energia-arrow-right"></i></a></div>
                 </div>

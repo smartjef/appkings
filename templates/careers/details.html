@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<!--Project Single Section-->
+<section class="project-single" id="project-single">
+    <!-- Start .project-intro-->
+    <div class="project-intro">
+        <div class="container">
+            <div class="row">
+                <div class="project-img"><img src="/static/favicon.ico" style="min-height: 200px;" alt="">
+                    <div class="project-panel">
+                        <div class="project-panel-holder">
+                            <div class="project-content">
+                                <div class="project-title">
+                                    <h4><a href="#">{{ job.title }}</a></h4>
+                                </div>
+                                <div class="project-desc">
+                                    <p><strong>Type: </strong><span>{{ job.job_type|title }}</span><br><strong>Location:
+                                        </strong><span>{{ job.location }}</span></p>
+                                </div>
+                                <div class="project-more"><a class="btn btn--primary"
+                                        href="mailto:info@appkings.co.ke?subject=Application for {{ job.title }}">Apply
+                                        Now <i class="energia-arrow-right"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End .row-->
+        </div>
+        <!-- End .container-->
+    </div>
+    <div class="project-overview project-overview-1">
+        <div class="container">
+            <div class="heading heading-20">
+                <div class="row">
+                    <div class="col-12 col-lg-6 PB-3">
+                        <p class="heading-desc">{{ job.description|safe|default:'No description' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

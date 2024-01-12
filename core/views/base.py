@@ -68,18 +68,6 @@ def survey(request):
     }
     return render(request, 'survey.html', context)
 
-def terms(request):
-    context = {
-        'title': 'Terms & Condition',
-    }
-    return render(request, 'terms.html', context)
-
-def privacy(request):
-    context = {
-        'title': 'Privacy Policy',
-    }
-    return render(request, 'privacy.html', context)
-
 def faq(request):
     context = {
         'title': 'Frequently Asked Questions',

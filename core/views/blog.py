@@ -48,7 +48,6 @@ def detail(request, slug):
         'category': 'Blog',
         'category_url': category_url,
         'blog': blog,
-#        'hero_url': blog.image.cover_image.url if blog.image else None,
         'tags': Tag.objects.all(),
         'next_blog': next_blog,
         'prev_blog': prev_blog,
