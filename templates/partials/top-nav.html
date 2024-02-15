@@ -56,7 +56,7 @@
                     </ul>
                 </li>
                 {% if services %}
-                <li class="nav-item has-dropdown" id="departments" data-hover=""><a class="dropdown-toggle" href="#" data-toggle="dropdown"><span>Services</span></a>
+                <li class="nav-item has-dropdown" id="departments" data-hover=""><a class="dropdown-toggle" href="#" data-toggle="dropdown"><span>Solutions</span></a>
                     <ul class="dropdown-menu">
                         {% for service in services %}
                             <li class="nav-item"><a href="{{ service.get_absolute_url }}"><span>{{ service.title|truncatechars:45 }}</span></a></li>

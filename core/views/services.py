@@ -4,7 +4,7 @@ from django.urls import reverse
 #Services
 def index(request):
     context = {
-        'title': 'Our Services',
+        'title': 'Our Solutions',
         'services' : Service.objects.filter(is_active=True)
     }
     return render(request, 'services/index.html', context)
