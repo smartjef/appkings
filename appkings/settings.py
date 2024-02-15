@@ -11,8 +11,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    '52.147.195.49',
+    '37.59.215.255',
     '127.0.0.1',
+    'appkings.co.ke',
+    'www.appkings.co.ke'
 ]
 
 ADMINS = [
@@ -65,26 +67,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'appkings.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': '5432',
-        'OPTIONS': {
-            'sslmode': 'require',
-        }
 
+DATABASES = {
+    'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
