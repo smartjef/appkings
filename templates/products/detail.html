@@ -137,7 +137,7 @@
                     <div class="service-content">
                         <h4><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title|truncatechars:27 }}</a></h4>
                         <p>
-                            {{ service.description|truncatechars:330|default:'No description' }}
+                            {{ service.get_overview|default:'No description' }}
                         </p>
                     </div>
                 </div>
