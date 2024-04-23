@@ -135,7 +135,7 @@
                         <!-- <i class="flaticon-004-solar-panel"></i> -->
                     </div>
                     <div class="service-content">
-                        <h4><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title|truncatechars:27 }}</a></h4>
+                        <h4 class="pt-3 h6"><a href="{{ service.get_absolute_url }}" title="{{ service.title }}">{{ service.title }}</a></h4>
                         <p>
                             {{ service.get_overview|default:'No description' }}
                         </p>
