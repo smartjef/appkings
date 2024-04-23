@@ -14,6 +14,8 @@ ALLOWED_HOSTS = [
     '37.59.215.255',
     '127.0.0.1',
     '102.37.21.185',
+    'salesapp.co.ke',
+    'www.salesapp.co.ke',
     'app.vstech.co.ke',
     'www.app.vstech.co.ke'
     'appkings.co.ke',
