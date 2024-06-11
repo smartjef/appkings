@@ -11,8 +11,40 @@
         </div>
         {% endif %}
         <!-- End .row-->
-        {% if blogs %}
             <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="blog-entry" data-hover="">
+                        <div class="entry-content">
+                            <div class="entry-meta">
+                                <div class="entry-date"><span class="day">May 1</span><span class="year">2024</span></div>
+                                <!-- End .entry-date		-->
+                                <div class="entry-author">
+                                    <p>Jeremy Otieno</p>
+                                </div>
+                            </div>
+                            <div class="entry-title">
+                                <h4 class="text-wrap"><a href="https://dynamics365.africa/education/appkings/">Embrace the Future of Education with AppKings Solutions and Dynamics 365 Business Central</a></h4>
+                            </div>
+                            <div class="entry-img-wrap">
+                                <div class="entry-img"><a href="https://dynamics365.africa/education/appkings/"><img src="/static/images/appkings-feature-1.jpg" class="img-fluid" alt="{{ blog.title }}" /></a></div>
+                                {% if blog.tags.all %}
+                                <div class="entry-category">
+                                    {% for tag in blog.tags.all %}
+                                        <a href="{{ tag.get_blogs_url }}">{{ tag.title }}</a>
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <!-- End .entry-img-->
+                            <div class="entry-bio text-wrap">
+                              <p>Revolutionising academic administration with innovative solutions by AppKings in partnership with Microsoft Dynamics 365 Business Central.</p>
+                            </div>
+                            <div class="entry-more"> <a class="btn btn--white btn-bordered" href="https://dynamics365.africa/education/appkings/">read more <i class="energia-arrow-right"></i></a></div>
+                        </div>
+                    </div>
+                    <!-- End .entry-content-->
+                </div>
+                {% if blogs %}
                 {% for blog in blogs %}
                 <div class="col-12 col-lg-4">
                     <div class="blog-entry" data-hover="">
@@ -49,6 +81,7 @@
                     <!-- End .entry-content-->
                 </div>
                 {% endfor %}
+                {% endif %}
             </div>
             {% if title != 'Our Blog' %}
             <div class="row">
@@ -58,9 +91,7 @@
             </div>
             {% endif %}
             <!-- End .row-->
-        {% else %}
-        <p class="text-center">No blog post found</p>
-        {% endif %}
+        
     </div>
     <!-- End .container-->
 </section>
